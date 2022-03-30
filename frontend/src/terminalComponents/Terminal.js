@@ -18,12 +18,20 @@ function Terminal() {
   };
 
   const onKey = (event) => {
+
+  const code = event.key.charCodeAt(0);
+
     if(event.key === '\r') {
       //send through websocket
       console.log("sending msg...");
       ws.send(messageString);
       messageString = "";
       prompt(false);
+    }
+
+    if(code === 127) {
+    messageString = messageString.slice(0, -1);
+    XTermRef.current.terminal.write("\b \b");
     }
 
     else {

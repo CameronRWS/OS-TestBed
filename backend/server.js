@@ -47,7 +47,7 @@ app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 // create websocket connection
 wsServer.on('connection', ws => {
 	ws.on('message', message => {
-		ws.send('Message received : ' + message);
+		ws.send('Message received: ' + message);
 	});
 	ws.send('Successful connection');
 });
