@@ -5,6 +5,7 @@ import Button from "react-bootstrap/esm/Button";
 
 function AdminDashboard({ setPage, setID, userId }) {
   const [graph, setGraph] = useState(false);
+  const [gdata, setGData] = useState(null);
   const [list, setList] = useState(null);
   const [loaded, setLoaded] = useState(false);
   var occurrences = [];
@@ -62,8 +63,17 @@ function AdminDashboard({ setPage, setID, userId }) {
     }
   }
 
+  const getData = async () => {
+    setLoaded(false);
+    const res = await fetch(`http://${process.env.REACT_APP_IP}:8080/api/userActivity`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+    setGData(await res.json());
+  };
+
   useEffect(() => {
-    getEvents();
+    getData();
   }, []);
 
   const loadData = async () => {
