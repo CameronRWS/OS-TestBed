@@ -269,6 +269,26 @@
         }
       }
     },
+    "/api/userActivity/": {
+      "post": {
+        "tags": [
+          "api"
+        ],
+        "description": "Use this to get the amount of activity on the website.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Sent when the data is sent."
+          },
+          "412": {
+            "description": "Sent when something is wrong with your request's json object."
+          },
+          "500": {
+            "description": "Sent when something went wrong with the backend outside of frontend's control."
+          }
+        }
+      }
+    },
     "/api/event/": {
       "post": {
         "tags": [

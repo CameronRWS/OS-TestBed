@@ -7,5 +7,6 @@ module.exports = (app) => {
   router.post("/api/upload/:id", fileHandler.uploader, api.fileUpload);
   router.post("/api/useComputer/", api.useComputer);
   router.post("/api/releaseComputer/", api.releaseComputer);
+  router.post("/api/userActivity/", api.userActivity);
   app.use("", router);
 };

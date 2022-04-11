@@ -11,8 +11,8 @@ function AdminDashboard({ setPage, setID, userId }) {
   let chartA = {};
 
   function getEvents() {
-    fetch(`http://${process.env.REACT_APP_IP}:8080/api/event`, {
-      method: "GET",
+    fetch(`http://${process.env.REACT_APP_IP}:8080/api/userActivity`, {
+      method: "POST",
       headers: { "Content-Type": "application/json" },
     }).then(async (response) => {
       if (response.status === 200) {

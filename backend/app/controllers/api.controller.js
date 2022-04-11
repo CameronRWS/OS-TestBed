@@ -386,3 +386,38 @@ exports.releaseComputer = async (req, res) => {
     message: `Success! Computer id=${computerId} has been released.`,
   });
 };
+
+exports.userActivity = async (req,res) => {
+  /*
+    #swagger.tags = ['api']
+    #swagger.description = 'Use this to get the amount of activity on the website.'
+
+    #swagger.responses[200] = { description: 'Sent when the data is sent.' }
+    #swagger.responses[412] = { description: 'Sent when something is wrong with your request\'s json object.' }
+    #swagger.responses[500] = { description: 'Sent when something went wrong with the backend outside of frontend\'s control.' }
+  */
+ let eventTimes = await Event.findAll({
+   attributes: [
+     'eventTypeId',
+     [db.sequelize.fn('hour', db.sequelize.col('createdAt')), 'hour']
+    ],
+    where: {
+      eventTypeId: {
+        [db.Sequelize.Op.or]: [1,2]
+      }
+    }
+  }).then((eventTimes) => {
+    if(eventTimes)
+      res.send(eventTimes);
+    else{
+      res.status(500).send({
+        message: "Something went wrong in getting events",
+      })
+    }
+  }).catch((err) => {
+    res.status(500).send({
+      message: "Error: "+err,
+    });
+  });;
+
+}
