@@ -1,21 +1,38 @@
-#bar-chart{
-    background-color: rgb(55, 71, 79);
-    width: 800px;
-    height: 350px;
-    font-family: Lato, Helvetica-Neue, monospace;
+.ct-chart {
+  position: relative;
 }
 
-.ct-series-a .ct-bar {
-  /* Colour of your bars */
-  stroke:  #be1e2d;
-  stroke-width: 30;
-}
-.ct-series-b .ct-bar {
-  /* Colour of your bars */
-  stroke:  #00a79d;
-  stroke-width: 30;
+.chartist-tooltip {
+  position: absolute;
+  display: inline-block;
+  opacity: 0;
+  min-width: 5em;
+  padding: 0.5em;
+  background: #ddd;
+  color: #453d3f;
+  font-family: Oxygen, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  text-align: center;
+  pointer-events: none;
+  z-index: 1;
+  -webkit-transition: opacity 0.2s linear;
+  -moz-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
 }
 
-.ct-label {
-  color: black;
+.chartist-tooltip:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-top-color: #ddd;
+}
+
+.chartist-tooltip.tooltip-show {
+  opacity: 1;
 }

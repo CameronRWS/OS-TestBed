@@ -407,9 +407,34 @@ exports.userActivity = async (req,res) => {
       }
     }
   }).then((eventTimes) => {
-    if(eventTimes)
-      res.send(eventTimes);
-    else{
+    if(eventTimes){
+      // let occurrences = {};
+      // for (const element of eventTimes) {
+      //   if (occurrences[element.hours]) {
+      //     occurrences[element.hours] += 1;
+      //   } else {
+      //     occurrences[element.hours] = 1;
+      //   }
+      // }
+      let hours = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0,];
+      for(let i=0;i<eventTimes.length;i++)
+      {
+        hours[eventTimes[i].dataValues.hour]+=1;
+      }
+      let hour = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24,
+      ];
+      let datasets = {
+        label: "Logins in hour",
+        data: hours,
+        borderColor: "rgb(53,162,235)",
+        backgroundColor: "rgba(53,162,235,0.4)",
+      }
+      let times = {labels:hour,datasets:datasets};
+      res.send(times);
+    }else{
       res.status(500).send({
         message: "Something went wrong in getting events",
       })
