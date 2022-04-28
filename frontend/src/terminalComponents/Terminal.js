@@ -59,13 +59,11 @@ function Terminal({ setPage, computerId, userId, isAdmin }) {
     console.log("Typed in terminal: " + JSON.stringify(messageString));
 
     if (event.key === "\u001b[C" ) {
-      messageString = messageString.slice(0, 0);
       XTermRef.current.terminal.write("\b");
     }
 
     if (event.key === "\u001b[A" || event.key === "\u001b[B" || event.key === "\u001b[D"){
-      messageString = messageString.slice(-1, 0);
-      XTermRef.current.terminal.write("\b");
+      XTermRef.current.terminal.write(" " + "\r\n$ ");
     }
 
     if (code === 127) {
