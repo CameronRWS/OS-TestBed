@@ -55,11 +55,17 @@ function Terminal({ setPage, computerId, userId, isAdmin }) {
   const onKey = (event) => {
     const code = event.key.charCodeAt(0);
 
-    //for finding ASCII code
-    console.log(code);
+    //for finding regex
+    console.log("Typed in terminal: " + JSON.stringify(messageString));
 
-    if (code === 27) {
-      console.log("arrow key");
+    if (event.key === "\u001b[C" ) {
+      messageString = messageString.slice(0, 0);
+      XTermRef.current.terminal.write("\b");
+    }
+
+    if (event.key === "\u001b[A" || event.key === "\u001b[B" || event.key === "\u001b[D"){
+      messageString = messageString.slice(-1, 0);
+      XTermRef.current.terminal.write("\b");
     }
 
     if (code === 127) {
