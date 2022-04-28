@@ -55,10 +55,23 @@ function Terminal({ setPage, computerId, userId, isAdmin }) {
   const onKey = (event) => {
     const code = event.key.charCodeAt(0);
 
+    //for finding ASCII code
+    console.log(code);
+
+    if (code === 27) {
+      console.log("arrow key");
+    }
+
     if (code === 127) {
       if (messageString.length > 0) {
         messageString = messageString.slice(0, -1);
         XTermRef.current.terminal.write("\b \b");
+      }
+    }
+    else {
+      if (code !== 127) {
+        messageString += event.key;
+        XTermRef.current.terminal.write(event.key);
       }
     }
 
@@ -66,17 +79,14 @@ function Terminal({ setPage, computerId, userId, isAdmin }) {
       ws.send(JSON.stringify({ messageType: "terminal-message", body: messageString }));
       messageString = "";
       XTermRef.current.terminal.write("\r\n$ ");
-    } else {
-      if (code !== 127) {
-        messageString += event.key;
-        XTermRef.current.terminal.write(event.key);
-      }
     }
+
+
   };
 
   let content = (
     <div>
-      <XTerm ref={XTermRef} options={XTermOpt} onKey={onKey} />
+      <XTerm ref={XTermRef} options={XTermOpt} onKey={onKey}/>
       <button onClick={() => ws.close()}>Close terminal</button>
       <button onClick={() => clearTerminal()}>Clear terminal</button>
     </div>
