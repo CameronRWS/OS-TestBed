@@ -1,5 +1,6 @@
 import React from "react";
 import { XTerm } from "xterm-for-react";
+import './TerminalPage.css';
 
 var ws;
 
@@ -55,15 +56,29 @@ function Terminal({ setPage, computerId, userId, isAdmin }) {
   const onKey = (event) => {
     const code = event.key.charCodeAt(0);
 
-    //for finding regex
-    console.log("Typed in terminal: " + JSON.stringify(messageString));
+    // //for finding regex
+    console.log(event.key);
+
+    if (event.key === "\u001b[A") {
+      XTermRef.current.terminal.write(" " + "\r\r\n$ ");
+    }
+
+    if ( event.key === "\u001b[B") {
+      XTermRef.current.terminal.write("\b" + "\r\n$ ");
+    }
 
     if (event.key === "\u001b[C" ) {
       XTermRef.current.terminal.write("\b");
     }
 
-    if (event.key === "\u001b[A" || event.key === "\u001b[B" || event.key === "\u001b[D"){
-      XTermRef.current.terminal.write(" " + "\r\n$ ");
+    if (event.key === "\u001b[D"){
+      if (messageString.length <= 0) {
+        messageString = messageString.slice(0, 0);
+        XTermRef.current.terminal.write("\b");
+      }
+      else {
+      XTermRef.current.terminal.write("\b");
+      }
     }
 
     if (code === 127) {
