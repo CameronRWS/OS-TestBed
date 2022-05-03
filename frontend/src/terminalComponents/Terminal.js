@@ -1,6 +1,5 @@
 import React from "react";
 import { XTerm } from "xterm-for-react";
-import './TerminalPage.css';
 
 var ws;
 
@@ -49,7 +48,7 @@ function Terminal({ setPage, computerId, userId, isAdmin }) {
 
   function printToTerminal(str) {
     if (XTermRef.current) {
-      XTermRef.current.terminal.write(str + "\r\n$ ");
+      XTermRef.current.terminal.write("\x1B[1;32m" + str + "\r\n$ ");
     }
   }
 

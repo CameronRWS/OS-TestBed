@@ -64,14 +64,13 @@ function Login({ setPage, setUserId, setIsAdmin}) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button class="button button1" size="lg" type="submit" disabled={!validateForm()}>
+        <Button className="button button1" size="lg" type="submit" disabled={!validateForm()}>
           Login
-        </Button>{' '}
+        </Button>
       </Form>
       <div id="fail_message"></div>
     </div>
   );
-
   return content;
 }
 
