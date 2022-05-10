@@ -67,15 +67,3 @@ npm start
 
 now you can type `localhost:3000` in your browser to view the website!
 
-## TODO
-
-- [x] terminal page
-- [x] login page/requests
-- [x] backend docs
-- [ ] admin dashboard
-- [ ] websocket connection for terminal
-- [ ] network boot for the pi's with xv6
-- [ ] get requests for pi information
-- [ ] reboot/back/logout frontend buttons
-- [ ] file upload
-
